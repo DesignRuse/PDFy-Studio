@@ -1,0 +1,1723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDFy Studio | Offline Image to PDF Converter - Secure & Private Document Conversion</title>
+    <meta name="description" content="Convert images to PDFs completely offline with PDFy Studio. Keep sensitive documents secure with our privacy-focused tool. One-time payment, lifetime access.">
+    <meta name="keywords" content="offline pdf converter, image to pdf, privacy pdf tool, secure document conversion, offline document processing">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="PDFy Studio">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="PDFy Studio | Offline Image to PDF Converter">
+    <meta property="og:description" content="Convert images to PDF completely offline. Keep your documents private and secure.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1506784983877-45594efa4cbe">
+    <meta property="og:url" content="https://pdfystudio.com">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PDFy Studio | Offline Image to PDF Converter">
+    <meta name="twitter:description" content="Convert images to PDF offline with complete privacy. Your documents never leave your device.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1506784983877-45594efa4cbe">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "PDFy Studio",
+      "description": "Offline image to PDF converter that keeps your documents private and secure.",
+      "offers": {
+        "@type": "Offer",
+        "price": "499",
+        "priceCurrency": "INR"
+      },
+      "operatingSystem": "Windows, macOS, Linux, iOS, Android",
+      "applicationCategory": "UtilityApplication",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "245"
+      }
+    }
+    </script>
+    
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Fonts and Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📄</text></svg>">
+    
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #dbeafe;
+            --secondary: #10b981;
+            --secondary-dark: #0da271;
+            --accent: #f59e0b;
+            --dark: #1e293b;
+            --darker: #0f172a;
+            --light: #f8fafc;
+            --light-gray: #e2e8f0;
+            --medium-gray: #94a3b8;
+            --border-radius: 16px;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --gradient-primary: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            --gradient-secondary: linear-gradient(135deg, #10b981 0%, #0da271 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark);
+            background-color: var(--light);
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            padding: 6rem 0;
+            scroll-margin-top: 80px;
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--darker);
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        p {
+            color: var(--medium-gray);
+            margin-bottom: 1.25rem;
+            font-size: 1.1rem;
+        }
+
+        /* Header */
+        header {
+            padding: 1.2rem 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: 800;
+            font-size: clamp(1.5rem, 5vw, 1.8rem);
+            color: var(--darker);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--primary);
+            transition: var(--transition);
+            font-size: 1.8rem;
+        }
+
+        .logo:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 0.9rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
+            white-space: nowrap;
+            width: auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn:hover::before {
+            transform: translateX(100%);
+        }
+
+        .btn-secondary {
+            background: var(--gradient-secondary);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 7rem 0 5rem;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -10%;
+            width: 80%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+            transform: rotate(30deg);
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .tagline {
+            font-size: clamp(2rem, 7vw, 3.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--darker);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .tagline span {
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+
+        .tagline span::after {
+            content: "";
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 12px;
+            background: rgba(37, 99, 235, 0.15);
+            z-index: -1;
+            border-radius: 4px;
+            animation: highlight 2s infinite;
+        }
+
+        .subheadline {
+            font-size: clamp(1.2rem, 3.5vw, 1.8rem);
+            font-weight: 500;
+            color: var(--dark);
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.4;
+            animation: fadeInUp 1s ease-out 0.2s forwards;
+            opacity: 0;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1.2rem;
+            margin-top: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.4s forwards;
+            opacity: 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.2rem;
+            margin-top: 3rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1s ease-out 0.6s forwards;
+            opacity: 0;
+        }
+
+        .feature-item {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 1.5rem 1rem;
+            text-align: center;
+            border: 1px solid rgba(37, 99, 235, 0.1);
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .feature-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .feature-item i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .feature-item h3 {
+            font-size: 1.1rem;
+            color: var(--darker);
+            font-weight: 700;
+        }
+
+        /* Features Section */
+        .features {
+            background-color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            font-weight: 900;
+            margin-bottom: 1.2rem;
+            color: var(--darker);
+            line-height: 1.2;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: clamp(1rem, 3vw, 1.25rem);
+            color: var(--medium-gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid-main {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .feature-card {
+            background: var(--light);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid var(--light-gray);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .feature-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+            z-index: -1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2.2rem;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--darker);
+        }
+
+        .feature-card p {
+            color: var(--medium-gray);
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            background: linear-gradient(to bottom, #f0f9ff, #e0f2fe);
+            position: relative;
+            overflow: hidden;
+            padding: 5rem 0;
+        }
+
+        .how-it-works::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=1790') no-repeat center right/cover;
+            opacity: 0.05;
+            z-index: 1;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .step:hover {
+            transform: translateY(-10px);
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin: 0 auto 1.5rem;
+            transition: var(--transition);
+        }
+
+        .step:hover .step-number {
+            transform: scale(1.1);
+        }
+
+        .step-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--darker);
+        }
+
+        .step-icon {
+            font-size: 2.8rem;
+            margin-bottom: 1.2rem;
+            color: var(--primary);
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background-color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card {
+            background: var(--light);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            position: relative;
+            border: 1px solid var(--light-gray);
+            transition: var(--transition);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .rating {
+            color: #fbbf24;
+            margin: 1rem 0;
+            font-size: 1.2rem;
+        }
+
+        .testimonial-text {
+            margin: 2rem 0;
+            font-style: italic;
+            color: var(--dark);
+            position: relative;
+            z-index: 2;
+            font-size: 1.05rem;
+        }
+
+        .testimonial-text::before {
+            content: """;
+            position: absolute;
+            top: -30px;
+            left: -10px;
+            font-size: 5rem;
+            color: var(--primary-light);
+            font-family: Georgia, serif;
+            line-height: 1;
+            z-index: -1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-light) 0%, #bfdbfe 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .author-info h4 {
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            font-size: 1.15rem;
+        }
+
+        .author-info p {
+            color: var(--medium-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Who's It For Section */
+        .audience {
+            background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .audience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .audience-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid var(--light-gray);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .audience-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow);
+        }
+
+        .audience-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2.2rem;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .audience-card:hover .audience-icon {
+            transform: scale(1.1);
+        }
+
+        .audience-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--darker);
+        }
+
+        .audience-card p {
+            color: var(--medium-gray);
+        }
+
+        .benefit-tag {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--secondary-dark);
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .audience-card:hover .benefit-tag {
+            background: var(--secondary);
+            color: white;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            background-color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 3rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--light-gray);
+            transition: var(--transition);
+            z-index: 1;
+            min-width: 300px;
+            max-width: 450px;
+            width: 100%;
+        }
+
+        .pricing-card.popular {
+            border: 2px solid var(--primary);
+            transform: scale(1.02);
+        }
+
+        .popular-tag {
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background-color: var(--secondary);
+            color: white;
+            padding: 0.5rem 2.2rem;
+            transform: rotate(45deg);
+            font-weight: 700;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        .price {
+            font-size: clamp(3rem, 10vw, 4.5rem);
+            font-weight: 800;
+            color: var(--darker);
+            margin: 1.5rem 0 0.5rem;
+            line-height: 1;
+        }
+
+        .price-period {
+            font-size: 1.25rem;
+            color: var(--medium-gray);
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .features-list {
+            list-style: none;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .features-list li {
+            padding: 0.8rem 0;
+            display: flex;
+            align-items: center;
+            font-size: 1.05rem;
+        }
+
+        .features-list li::before {
+            content: "✓";
+            color: var(--secondary);
+            font-weight: bold;
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+
+        /* FAQ Section */
+        .faq {
+            background: linear-gradient(to bottom, #e0f2fe, #dbeafe);
+            position: relative;
+            overflow: hidden;
+            padding: 5rem 0;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 2rem auto 0;
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            background: white;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            background-color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .faq-question:hover {
+            background-color: #f8fafc;
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            background-color: #f8fafc;
+        }
+
+        .faq-answer-content {
+            padding: 0 0 1.5rem;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-icon {
+            transition: transform 0.3s ease;
+            color: var(--primary);
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        /* CTA Section - Enhanced for Responsiveness */
+        .cta {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: "";
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+        }
+
+        .cta::after {
+            content: "";
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+        }
+
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-title {
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            color: white;
+        }
+
+        .cta-subtitle {
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            opacity: 0.9;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .cta-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            margin: 0 auto 2.5rem;
+            max-width: 600px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            transition: var(--transition);
+        }
+
+        .cta-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .cta-card-title {
+            font-size: clamp(1.5rem, 4vw, 1.8rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            color: white;
+        }
+
+        .cta-card-title .price {
+            font-size: clamp(2.5rem, 8vw, 3.5rem);
+            color: white;
+            margin: 0;
+            display: inline-block;
+        }
+
+        .urgency {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            background: var(--secondary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            margin: 1.5rem 0;
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+            animation: pulse 2s infinite;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .cta-btn {
+            background: white;
+            color: var(--primary);
+            font-weight: 700;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+            text-decoration: none;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+        }
+
+        .reassurance {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
+        }
+
+        .reassurance-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+        }
+
+        .reassurance-item i {
+            color: var(--secondary);
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 0 2rem;
+            background-color: var(--darker);
+            color: var(--light-gray);
+            position: relative;
+            text-align: center;
+        }
+
+        .footer-logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-logo i {
+            margin-right: 10px;
+            color: var(--primary);
+            font-size: 2rem;
+        }
+
+        .footer-logo span {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: white;
+        }
+
+        .copyright {
+            margin-top: 2rem;
+            color: var(--light-gray);
+            font-size: 1rem;
+            opacity: 0.7;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 99;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+            font-size: 1.2rem;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--primary-dark);
+            transform: translateY(-5px);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes highlight {
+            0% { transform: scaleX(0.8); opacity: 0.6; }
+            50% { transform: scaleX(1.1); opacity: 1; }
+            100% { transform: scaleX(0.8); opacity: 0.6; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            section {
+                padding: 5rem 0;
+            }
+            
+            .hero {
+                padding: 5rem 0 3rem;
+            }
+            
+            .steps, .testimonial-grid, .features-grid-main, .audience-grid {
+                gap: 1.2rem;
+            }
+            
+            .pricing-card {
+                padding: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 4rem 0;
+            }
+            
+            .hero-cta {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .feature-card, .testimonial-card, .step, .audience-card {
+                padding: 1.8rem;
+            }
+            
+            .pricing-card {
+                min-width: 100%;
+            }
+            
+            .cta {
+                padding: 4rem 0;
+            }
+            
+            .cta-card {
+                padding: 1.8rem;
+            }
+            
+            .cta-card-title {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .hero-cta a {
+                width: 100%;
+                text-align: center;
+            }
+            
+            /* Enhanced for mobile */
+            .urgency {
+                padding: 0.8rem;
+                text-align: center;
+            }
+            
+            .cta-btn {
+                width: 100%;
+                max-width: none;
+            }
+        }
+
+        @media (max-width: 576px) {
+            section {
+                padding: 3.5rem 0;
+            }
+            
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .hero {
+                padding: 4rem 0 2rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .feature-item {
+                padding: 1.2rem 0.5rem;
+            }
+            
+            .pricing-card {
+                padding: 1.8rem;
+            }
+            
+            .cta {
+                padding: 3.5rem 1rem;
+            }
+            
+            .reassurance {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            
+            .back-to-top {
+                bottom: 1.5rem;
+                right: 1.5rem;
+                width: 45px;
+                height: 45px;
+            }
+            
+            /* Mobile-specific CTA enhancements */
+            .cta-card-title .price {
+                font-size: 2.8rem;
+            }
+            
+            .urgency {
+                flex-direction: column;
+                text-align: center;
+                padding: 0.8rem;
+                gap: 0.5rem;
+            }
+            
+            .reassurance-item {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .features-grid-main, .audience-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo" aria-label="PDFy Studio Home">
+                <i class="fas fa-file-pdf"></i>
+                PDFy Studio
+            </a>
+            <a href="#pricing" class="btn" aria-label="Get started with PDFy Studio">Get Started</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="tagline">Turn Any Image Into a <span>Professional PDF</span> — Completely Offline</h1>
+                <p class="subheadline">Your Docs. Your Privacy. Your Control. Process images without internet connection and keep sensitive data secure on your device.</p>
+                
+                <div class="hero-cta">
+                    <a href="#pricing" class="btn btn-secondary" aria-label="Download PDFy Studio"><i class="fas fa-download"></i> Download Now</a>
+                    <a href="#how-it-works" class="btn btn-outline" aria-label="See how PDFy Studio works"><i class="fas fa-play-circle"></i> See How It Works</a>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-wifi-slash" aria-hidden="true"></i>
+                        <h3>Offline-First</h3>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-layer-group" aria-hidden="true"></i>
+                        <h3>Bulk Conversion</h3>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-file-pdf" aria-hidden="true"></i>
+                        <h3>Individual PDFs</h3>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-file-archive" aria-hidden="true"></i>
+                        <h3>ZIP Download</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Powerful Features, Simple Experience</h2>
+                <p class="section-subtitle">Everything you need to create professional PDFs without compromise</p>
+            </div>
+            
+            <div class="features-grid-main">
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3 class="feature-title">Privacy-First</h3>
+                    <p>Your documents never leave your device. Complete privacy guaranteed.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Lightning Fast</h3>
+                    <p>Convert images to PDF in seconds, no internet needed.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3 class="feature-title">Simple & Intuitive</h3>
+                    <p>Drag. Drop. Done. No steep learning curve.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">💼</div>
+                    <h3 class="feature-title">Professional Quality</h3>
+                    <p>Impress clients and colleagues with clean, pro-grade PDFs.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">⏳</div>
+                    <h3 class="feature-title">Time-Saving</h3>
+                    <p>Bulk-process images and boost productivity.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3 class="feature-title">Cross-Platform</h3>
+                    <p>Works on desktop, tablet, and mobile devices.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">How PDFy Studio Works</h2>
+                <p class="section-subtitle">Convert images to PDF in just two simple steps</p>
+            </div>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-icon"><i class="fas fa-cloud-upload-alt" aria-hidden="true"></i></div>
+                    <h3 class="step-title">Upload Images</h3>
+                    <p>Drag and drop your images into the application or select them from your device.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-icon"><i class="fas fa-file-download" aria-hidden="true"></i></div>
+                    <h3 class="step-title">Download PDF</h3>
+                    <p>Get your professional PDF file instantly, ready to share or print.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Trusted by Professionals Worldwide</h2>
+                <p class="section-subtitle">Real results from real users</p>
+            </div>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="rating">
+                        <i class="fas fa-star" aria-hidden="true"></i>
+                        <i class="fas fa-star" aria-hidden="true"></i>
+                        <i class="fas fa-star" aria-hidden="true"></i>
+                        <i class="fas fa-star" aria-hidden="true"></i>
+                        <i class="fas fa-star" aria-hidden="true"></i>
+                    </div>
+                    <p class="testimonial-text">"I used to waste hours weekly preparing client reports. PDFy Studio cut my document prep time by 70% while keeping sensitive client data secure on my device."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SK</div>
+                        <div class="author-info">
+                            <h4>Priya Sharma</h4>
+                            <p>Freelance Designer | Saved 8 hrs/week</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="rating">
+                        <i class="fas fa-star" aria-hidden="true"></i>
+                        <i class="fas fa-star" aria-hidden="true"></i>
+                        <i class="fas fa-star" aria-hidden="true"></i>
+                        <i class="fas fa-star" aria-hidden="true"></i>
+                        <i class="fas fa-star" aria-hidden="true"></i>
+                    </div>
+                    <p class="testimonial-text">"Working from remote locations with spotty internet, PDFy Studio has been a lifesaver. Converting research images to PDFs offline has transformed my workflow."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">DR</div>
+                        <div class="author-info">
+                            <h4>Arjun Joshi</h4>
+                            <p>Field Researcher | 200+ conversions/month</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="rating">
+                        <i class="fas fa-star" aria-hidden="true"></i>
+                        <i class="fas fa-star" aria-hidden="true"></i>
+                        <i class="fas fa-star" aria-hidden="true"></i>
+                        <i class="fas fa-star" aria-hidden="true"></i>
+                        <i class="fas fa-star" aria-hidden="true"></i>
+                    </div>
+                    <p class="testimonial-text">"The bulk processing feature has saved my accounting team 15 hours monthly. Creating client statements from dozens of images is now a one-click process."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MP</div>
+                        <div class="author-info">
+                            <h4>Rahul Mehta</h4>
+                            <p>Accounting Firm Owner | 500+ docs processed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Who's It For Section -->
+    <section class="audience" id="audience">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Who Benefits Most?</h2>
+                <p class="section-subtitle">PDFy Studio is essential for professionals who value:</p>
+            </div>
+            
+            <div class="audience-grid">
+                <div class="audience-card">
+                    <div class="audience-icon">
+                        <i class="fas fa-user-lock" aria-hidden="true"></i>
+                    </div>
+                    <h3>Privacy-Conscious Users</h3>
+                    <p>Healthcare, legal, and financial professionals who handle sensitive documents requiring complete confidentiality</p>
+                    <div class="benefit-tag">Benefit: HIPAA/GDPR-compliant processing</div>
+                </div>
+                
+                <div class="audience-card">
+                    <div class="audience-icon">
+                        <i class="fas fa-bolt" aria-hidden="true"></i>
+                    </div>
+                    <h3>Productivity Seekers</h3>
+                    <p>Consultants and freelancers who need to deliver polished client documents faster</p>
+                    <div class="benefit-tag">Benefit: Save 3+ hours weekly</div>
+                </div>
+                
+                <div class="audience-card">
+                    <div class="audience-icon">
+                        <i class="fas fa-wifi-slash" aria-hidden="true"></i>
+                    </div>
+                    <h3>Remote Workers</h3>
+                    <p>Field researchers, travelers, and remote teams with unreliable internet access</p>
+                    <div class="benefit-tag">Benefit: 100% offline functionality</div>
+                </div>
+                
+                <div class="audience-card">
+                    <div class="audience-icon">
+                        <i class="fas fa-layer-group" aria-hidden="true"></i>
+                    </div>
+                    <h3>Document-Intensive Roles</h3>
+                    <p>Researchers, educators, and admins processing large volumes of images regularly</p>
+                    <div class="benefit-tag">Benefit: Bulk processing superpowers</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Simple, Affordable Pricing</h2>
+                <p class="section-subtitle">One-time payment for lifetime access</p>
+            </div>
+            
+            <div class="pricing-container">
+                <div class="pricing-card popular">
+                    <div class="popular-tag">Most Popular</div>
+                    <h3>PDFy Studio Pro</h3>
+                    
+                    <div class="price">₹499</div>
+                    <div class="price-period">one-time payment</div>
+                    
+                    <ul class="features-list">
+                        <li>Lifetime access to PDFy Studio</li>
+                        <li>Unlimited image-to-PDF conversion</li>
+                        <li>All future updates included</li>
+                        <li>Works on any device (PWA-ready)</li>
+                        <li>Priority customer support</li>
+                        <li>Bulk processing capabilities</li>
+                        <li>PDF quality customization</li>
+                    </ul>
+                    
+                    <a href="#cta" class="btn btn-secondary">Get PDFy Studio Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <p class="section-subtitle">Everything you need to know about our offline-first solution</p>
+            </div>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">How does offline functionality work?<i class="fas fa-chevron-down faq-icon"></i></div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            PDFy Studio processes all images directly in your browser. No internet connection is needed after initial download, ensuring complete privacy and reliability even in areas with poor connectivity.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">What makes PDFy Studio different from online converters?<i class="fas fa-chevron-down faq-icon"></i></div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Unlike online tools, we never upload your documents to any server. Your sensitive images stay 100% private on your device throughout the conversion process.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Can I process multiple images at once?<i class="fas fa-chevron-down faq-icon"></i></div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Absolutely! Our bulk processing feature lets you convert dozens of images simultaneously, either as individual PDFs or combined into a single document. Perfect for portfolios, reports, or client deliverables.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Is my data secure with PDFy Studio?<i class="fas fa-chevron-down faq-icon"></i></div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Your data never leaves your device. All processing happens locally in your browser with no server interaction, ensuring maximum security and privacy.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Do I need to install software?<i class="fas fa-chevron-down faq-icon"></i></div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            PDFy Studio works directly in your browser (PWA) with no installation required. For frequent use, you can install it as a desktop/mobile app for one-click access.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Which platforms does PDFy Studio support?<i class="fas fa-chevron-down faq-icon"></i></div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            PDFy Studio works on all modern browsers including Chrome, Firefox, Safari, and Edge. It can also be installed as a Progressive Web App (PWA) on both desktop (Windows, macOS, Linux) and mobile (iOS, Android) devices for offline access.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Are there any file size limitations?<i class="fas fa-chevron-down faq-icon"></i></div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            There are no artificial file size limitations imposed by PDFy Studio. However, very large images may take longer to process depending on your device's capabilities. For optimal performance, we recommend images under 50MB each.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section - Enhanced for Responsiveness -->
+    <section class="cta" id="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Ready to Transform Your Document Workflow?</h2>
+                <p class="cta-subtitle">Join 15,000+ professionals who process documents with confidence and privacy</p>
+                
+                <div class="cta-card">
+                    <div class="cta-card-title">
+                        <span class="price">₹499</span>
+                        <span>One-Time Payment</span>
+                    </div>
+                    
+                    <div class="urgency">
+                        <i class="fas fa-clock"></i>
+                        <div>Price increases to ₹799 in:</div> 
+                        <span id="countdown">72:00:00</span>
+                    </div>
+                    
+                    <a href="#" class="cta-btn">
+                        <i class="fas fa-download"></i>
+                        Download & Start Converting Now
+                    </a>
+                    
+                    <div class="reassurance">
+                        <div class="reassurance-item">
+                            <i class="fas fa-lock"></i>
+                            <span>Complete Privacy & Security</span>
+                        </div>
+                        <div class="reassurance-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>GDPR & HIPAA Compliant</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo">
+                <i class="fas fa-file-pdf"></i>
+                <span>PDFy Studio</span>
+            </div>
+            <div class="copyright">
+                &copy; <span id="current-year"></span> PDFy Studio. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // FAQ Accordion Functionality
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            
+            question.addEventListener('click', () => {
+                // Toggle active class on clicked item
+                item.classList.toggle('active');
+                
+                // Close other items
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item && otherItem.classList.contains('active')) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Back to top button
+        const backToTopBtn = document.querySelector('.back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 500) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Countdown timer
+        function startCountdown() {
+            let hours = 72;
+            let minutes = 0;
+            let seconds = 0;
+            
+            const countdownElement = document.getElementById('countdown');
+            
+            const countdown = setInterval(() => {
+                seconds--;
+                if (seconds < 0) {
+                    seconds = 59;
+                    minutes--;
+                    if (minutes < 0) {
+                        minutes = 59;
+                        hours--;
+                        if (hours < 0) {
+                            clearInterval(countdown);
+                            countdownElement.textContent = "00:00:00";
+                            return;
+                        }
+                    }
+                }
+                
+                const formattedHours = hours.toString().padStart(2, '0');
+                const formattedMinutes = minutes.toString().padStart(2, '0');
+                const formattedSeconds = seconds.toString().padStart(2, '0');
+                
+                countdownElement.textContent = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+            }, 1000);
+        }
+        
+        // Initialize countdown on page load
+        startCountdown();
+    </script>
+</body>
+</html>
